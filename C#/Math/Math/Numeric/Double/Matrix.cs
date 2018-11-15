@@ -26,6 +26,11 @@ namespace Math.Numeric.Double
             return new Matrix(RowCount, ColumnCount);
         }
 
+        protected override Matrix<double> Build(int rows, int cols)
+        {
+            return new Matrix(rows, cols);
+        }
+
         protected override void DoAdd(double scalar, Matrix<double> result)
         {
             Map(result, (a) => scalar + a);

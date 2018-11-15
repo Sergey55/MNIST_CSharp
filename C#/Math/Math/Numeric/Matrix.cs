@@ -81,7 +81,35 @@ namespace Math.Numeric
             return result;
         }
 
+        public Matrix<T> Multiply(T scalar)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Matrix<T> Multiply(Matrix<T> other)
+        {
+            if (this.ColumnCount != other.RowCount)
+                throw new Exception("Dimensions do no match");
+
+            throw new NotImplementedException();
+        }
+
+        public Matrix<T> Transpose()
+        {
+            var result = Build(ColumnCount, RowCount);
+
+            for (var i = 0; i < RowCount; i++) {
+                for (var j = 0; j < ColumnCount; j++) {
+                    result[j,i] = this[i,j];
+                }
+            }
+
+            return result;
+        }
+
         protected abstract Matrix<T> Build();
+
+        protected abstract Matrix<T> Build(int rows, int cols);
 
         protected abstract void DoAdd(T scalar, Matrix<T> result);
 

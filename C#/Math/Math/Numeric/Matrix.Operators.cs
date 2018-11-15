@@ -36,5 +36,15 @@ namespace Math.Numeric
         {
             return leftMatrix.Subtract(rightMatrix);
         }
+
+        public static Matrix<T> operator *(T scalar, Matrix<T> rightMatrix)
+        {
+            return rightMatrix.Multiply(scalar);
+        }
+
+        public static Matrix<T> operator *(Matrix<T> leftMatrix, Matrix<T> rightMatrix)
+        {
+            return leftMatrix.Multiply(rightMatrix);
+        }
     }
 }

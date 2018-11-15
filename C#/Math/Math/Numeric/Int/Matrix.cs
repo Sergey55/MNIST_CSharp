@@ -18,6 +18,11 @@
             return new Matrix(RowCount, ColumnCount);
         }
 
+        protected override Matrix<int> Build(int rows, int cols)
+        {
+            return new Matrix(rows, cols);
+        }
+
         protected override void DoAdd(int scalar, Matrix<int> result)
         {
             Map(result, (a) => scalar + a);
