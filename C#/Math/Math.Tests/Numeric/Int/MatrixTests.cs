@@ -42,5 +42,35 @@ namespace Math.Tests.Numeric.Int
             Assert.True(res[1, 0] == 10);
             Assert.True(res[1, 1] == 12);
         }
+
+        [Fact]
+        public void SubstractScalarFromMatrixInt_Test()
+        {
+            var matrix = new Matrix(new int[,] { { 1, 2, 3 }, { 4, 5, 6 } });
+
+            var result = matrix + 2;
+
+            Assert.True(result[0, 0] == 3);
+            Assert.True(result[0, 1] == 4);
+            Assert.True(result[0, 2] == 5);
+            Assert.True(result[1, 0] == 6);
+            Assert.True(result[1, 1] == 7);
+            Assert.True(result[1, 2] == 8);
+        }
+
+        [Fact]
+        public void TransposeMatrixInt_Test()
+        {
+            var matrix = new Matrix(new int[,] {{1, 2, 3}, {4, 5, 6}});
+
+            var result = matrix.Transpose();
+
+            Assert.True(result[0, 0] == 1);
+            Assert.True(result[0, 1] == 4);
+            Assert.True(result[1, 0] == 2);
+            Assert.True(result[1, 1] == 5);
+            Assert.True(result[2, 0] == 3);
+            Assert.True(result[2, 1] == 6);
+        }
     }
 }

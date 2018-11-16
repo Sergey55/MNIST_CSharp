@@ -53,12 +53,25 @@ namespace Math.Numeric.Double
 
         protected override void DoMultiply(double scalar, Matrix<double> result)
         {
-            throw new NotImplementedException();
+            Map(result, (a) => scalar * a);
         }
 
         protected override void DoMultiply(Matrix<double> other, Matrix<double> result)
         {
-            throw new NotImplementedException();
+            for (var i = 0; i < RowCount; i++)
+            {
+                for (var j = 0; j < other.ColumnCount; j++)
+                {
+                    var amount = 0.0;
+
+                    for (var k = 0; k < ColumnCount; k++)
+                    {
+                        amount += this[i, k] * other[k, j];
+                    }
+
+                    result[i, j] = amount;
+                }
+            }
         }
     }
 }

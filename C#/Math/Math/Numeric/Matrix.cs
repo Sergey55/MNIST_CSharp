@@ -83,7 +83,11 @@ namespace Math.Numeric
 
         public Matrix<T> Multiply(T scalar)
         {
-            throw new NotImplementedException();
+            var result = Build();
+
+            DoMultiply(scalar, result);
+
+            return result;
         }
 
         public Matrix<T> Multiply(Matrix<T> other)
@@ -91,7 +95,11 @@ namespace Math.Numeric
             if (this.ColumnCount != other.RowCount)
                 throw new Exception("Dimensions do no match");
 
-            throw new NotImplementedException();
+            var result = Build(RowCount, other.ColumnCount);
+
+            DoMultiply(other, result);
+
+            return result;
         }
 
         public Matrix<T> Transpose()

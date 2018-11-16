@@ -45,12 +45,25 @@
 
         protected override void DoMultiply(int scalar, Matrix<int> result)
         {
-            throw new System.NotImplementedException();
+            Map(result, (a) => scalar * a);
         }
 
         protected override void DoMultiply(Matrix<int> other, Matrix<int> result)
         {
-            throw new System.NotImplementedException();
+            for (var i = 0; i < RowCount; i++)
+            {
+                for (var j = 0; j < other.ColumnCount; j++)
+                {
+                    var amount = 0;
+
+                    for (var k = 0; k < ColumnCount; k++)
+                    {
+                        amount += this[i, k] * other[k, j];
+                    }
+
+                    result[i, j] = amount;
+                }
+            }
         }
 
         //protected override void DoSubtract(int scalar, Matrix<int> result)

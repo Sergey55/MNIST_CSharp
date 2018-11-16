@@ -42,6 +42,11 @@ namespace Math.Numeric
             return rightMatrix.Multiply(scalar);
         }
 
+        public static Matrix<T> operator *(Matrix<T> leftMatrix, T scalar)
+        {
+            return leftMatrix.Multiply(scalar);
+        }
+
         public static Matrix<T> operator *(Matrix<T> leftMatrix, Matrix<T> rightMatrix)
         {
             return leftMatrix.Multiply(rightMatrix);
