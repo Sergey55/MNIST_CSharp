@@ -60,23 +60,32 @@ namespace Math.Numeric
             return result;
         }
 
-        public Matrix<T> Subtract(T scalar)
+        public Matrix<T> Substract(T scalar)
         {
             var result = Build();
 
-            DoSubtract(scalar, result);
+            DoSubstract(scalar, result);
 
             return result;
         }
 
-        public Matrix<T> Subtract(Matrix<T> other)
+        public Matrix<T> SubstractFromScalar(T scalar)
         {
-            if(this.RowCount != other.RowCount || this.ColumnCount != ColumnCount)
+            var result = Build();
+
+            DoSubstractFromScalar(scalar, result);
+
+            return result;
+        }
+
+        public Matrix<T> Substract(Matrix<T> other)
+        {
+            if(this.RowCount != other.RowCount || this.ColumnCount != other.ColumnCount)
                 throw new Exception("Dimensions do no match");
 
             var result = Build();
 
-            DoSubtract(other, result);
+            DoSubstract(other, result);
 
             return result;
         }
@@ -123,9 +132,11 @@ namespace Math.Numeric
 
         protected abstract void DoAdd(Matrix<T> other, Matrix<T> result);
 
-        protected abstract void DoSubtract(T scalar, Matrix<T> other);
+        protected abstract void DoSubstract(T scalar, Matrix<T> other);
 
-        protected abstract void DoSubtract(Matrix<T> other, Matrix<T> result);
+        protected abstract void DoSubstractFromScalar(T scalar, Matrix<T> other);
+
+        protected abstract void DoSubstract(Matrix<T> other, Matrix<T> result);
 
         protected abstract void DoMultiply(T scalar, Matrix<T> result);
 
@@ -153,14 +164,5 @@ namespace Math.Numeric
                 }
             }
         }
-
-        //public override String ToString()
-        //{
-        //    StringBuilder sb = new StringBuilder();
-
-
-
-        //    return sb.ToString();
-        //}
     }
 }

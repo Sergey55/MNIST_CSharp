@@ -24,17 +24,17 @@ namespace Math.Numeric
 
         public static Matrix<T> operator -(T scalar, Matrix<T> rightMatrix)
         {
-            return rightMatrix.Subtract(scalar);
+            return rightMatrix.SubstractFromScalar(scalar);
         }
 
         public static Matrix<T> operator -(Matrix<T> rightMatrix, T scalar)
         {
-            return rightMatrix.Subtract(scalar);
+            return rightMatrix.Substract(scalar);
         }
 
         public static Matrix<T> operator -(Matrix<T> leftMatrix, Matrix<T> rightMatrix)
         {
-            return leftMatrix.Subtract(rightMatrix);
+            return leftMatrix.Substract(rightMatrix);
         }
 
         public static Matrix<T> operator *(T scalar, Matrix<T> rightMatrix)

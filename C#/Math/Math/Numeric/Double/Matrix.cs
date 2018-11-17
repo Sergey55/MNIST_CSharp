@@ -41,12 +41,17 @@ namespace Math.Numeric.Double
             Map(other, result, (a, b) => a + b);
         }
 
-        protected override void DoSubtract(double scalar, Matrix<double> result)
+        protected override void DoSubstractFromScalar(double scalar, Matrix<double> result)
         {
             Map(result, (a) => scalar - a);
         }
 
-        protected override void DoSubtract(Matrix<double> other, Matrix<double> result)
+        protected override void DoSubstract(double scalar, Matrix<double> result)
+        {
+            Map(result, (a) => a - scalar);
+        }
+
+        protected override void DoSubstract(Matrix<double> other, Matrix<double> result)
         {
             Map(other, result, (a, b) => a - b);
         }

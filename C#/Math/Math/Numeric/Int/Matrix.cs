@@ -33,12 +33,17 @@
             Map(other, result, (a, b) => a + b);
         }
 
-        protected override void DoSubtract(int scalar, Matrix<int> result)
+        protected override void DoSubstract(int scalar, Matrix<int> result)
+        {
+            Map(result, (a) => a - scalar);
+        }
+
+        protected override void DoSubstractFromScalar(int scalar, Matrix<int> result)
         {
             Map(result, (a) => scalar - a);
         }
 
-        protected override void DoSubtract(Matrix<int> other, Matrix<int> result)
+        protected override void DoSubstract(Matrix<int> other, Matrix<int> result)
         {
             Map(other, result, (a, b) => a - b);
         }
