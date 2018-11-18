@@ -4,15 +4,7 @@
     {
         static void Main(string[] args)
         {
-            var data = new double[,]
-            {
-                {1, 1}, 
-                {1, 1}
-            };
-
-            var m = new Math.Numeric.Double.Matrix(data);
-
-            var r = m + m;
+            var nn = new NeuralNetwork.Network(3, 3, 3, 0.1);
         }
     }
 }

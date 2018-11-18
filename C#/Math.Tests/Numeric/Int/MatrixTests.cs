@@ -4,7 +4,7 @@ using Assert = Xunit.Assert;
 
 namespace Math.Tests.Numeric.Int
 {
-    public class MatrixTests
+    public class MatrixTests_Int
     {
         [Fact]
         public void Dimensions_Test()
@@ -16,7 +16,7 @@ namespace Math.Tests.Numeric.Int
         }
 
         [Fact]
-        public void AddScalarToMatrixInt_Test()
+        public void AddScalarToMatrix_Int_Test()
         {
             var scalar = 1;
             var matrix = new Matrix(new int[,]{{1, 1}, {1, 1}});
@@ -30,7 +30,7 @@ namespace Math.Tests.Numeric.Int
         }
 
         [Fact]
-        public void AddMatrixToScalarInt_Test()
+        public void AddMatrixToScalar_Int_Test()
         {
             var scalar = 1;
             var matrix = new Matrix(new int[,] { { 1, 1 }, { 1, 1 } });
@@ -44,7 +44,7 @@ namespace Math.Tests.Numeric.Int
         }
 
         [Fact]
-        public void AddMatrixToMatrixInt_Test()
+        public void AddMatrixToMatrix_Int_Test()
         {
             var matrix1 = new Matrix(new int[,] {{1, 2}, {3, 4}});
             var matrix2 = new Matrix(new int[,]{{5, 6}, {7, 8}});
@@ -58,7 +58,7 @@ namespace Math.Tests.Numeric.Int
         }
 
         [Fact]
-        public void AddMatrixToMatrixExceptionInt_Test()
+        public void AddMatrixToMatrixException_Int_Test()
         {
             var matrix1 = new Matrix(new int[,] { { 1, 2, 3 }, { 4, 5, 6 } });
             var matrix2 = new Matrix(new int[,] { { 1, 2 }, { 3, 4 } });
@@ -69,7 +69,7 @@ namespace Math.Tests.Numeric.Int
         }
 
         [Fact]
-        public void SubstractScalarFromMatrixInt_Test()
+        public void SubstractScalarFromMatrix_Int_Test()
         {
             var matrix = new Matrix(new int[,] { { 1, 2, 3 }, { 4, 5, 6 } });
 
@@ -84,7 +84,7 @@ namespace Math.Tests.Numeric.Int
         }
 
         [Fact]
-        public void SubstractMatrixFromScalarInt_Test()
+        public void SubstractMatrixFromScalar_Int_Test()
         {
             var matrix = new Matrix(new int[,] { { 1, 2, 3 }, { 4, 5, 6 } });
 
@@ -99,7 +99,7 @@ namespace Math.Tests.Numeric.Int
         }
 
         [Fact]
-        public void SubstractMatrixFromMatrixInt_Test()
+        public void SubstractMatrixFromMatrix_Int_Test()
         {
             var matrix1 = new Matrix(new int[,] { { 1, 2 }, { 3, 4 } });
             var matrix2 = new Matrix(new int[,] { { 5, 6 }, { 7, 8 } });
@@ -114,7 +114,7 @@ namespace Math.Tests.Numeric.Int
         }
 
         [Fact]
-        public void SubstractMatrixToMatrixExceptionInt_Test()
+        public void SubstractMatrixToMatrixException_Int_Test()
         {
             var matrix1 = new Matrix(new int[,] { { 1, 2, 3 }, { 4, 5, 6 } });
             var matrix2 = new Matrix(new int[,] { { 1, 2 }, { 3, 4 } });
@@ -125,7 +125,7 @@ namespace Math.Tests.Numeric.Int
         }
 
         [Fact]
-        public void MultiplyMatrixOnScalarInt_Test()
+        public void MultiplyMatrixOnScalar_Int_Test()
         {
             var matrix = new Matrix(new int[,] { { 1, 2 }, { 3, 4 } });
 
@@ -138,7 +138,7 @@ namespace Math.Tests.Numeric.Int
         }
 
         [Fact]
-        public void MultiplyScalarOnMatrixInt_Test()
+        public void MultiplyScalarOnMatrix_Int_Test()
         {
             var matrix = new Matrix(new int[,] { { 1, 2 }, { 3, 4 } });
 
@@ -151,7 +151,7 @@ namespace Math.Tests.Numeric.Int
         }
 
         [Fact]
-        public void MultiplyMatrixOnMatrixInt_Test()
+        public void MultiplyMatrixOnMatrix_Int_Test()
         {
             var matrix1 = new Matrix(new int[,] { { 1, 3 }, { 1, 2 } });
             var matrix2 = new Matrix(new int[,] { { 1, 2, 1 }, { 3, 1, 0 } });
@@ -171,7 +171,7 @@ namespace Math.Tests.Numeric.Int
         }
 
         [Fact]
-        public void MultiplyMatrixToMatrixExceptionInt_Test()
+        public void MultiplyMatrixToMatrixException_Int_Test()
         {
             var matrix1 = new Matrix(new int[,] { { 1, 2, 3 }, { 4, 5, 6 } });
             var matrix2 = new Matrix(new int[,] { { 1, 2 }, { 3, 4 } });
@@ -182,7 +182,7 @@ namespace Math.Tests.Numeric.Int
         }
 
         [Fact]
-        public void TransposeMatrixInt_Test()
+        public void TransposeMatrix_Int_Test()
         {
             var matrix = new Matrix(new int[,] {{1, 2, 3}, {4, 5, 6}});
 

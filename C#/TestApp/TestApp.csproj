@@ -53,6 +53,10 @@
       <Project>{039F4657-DBEB-47EF-92C5-1888929591B3}</Project>
       <Name>Math</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NeuralNetwork\NeuralNetwork.csproj">
+      <Project>{a07c8594-cb3f-452c-b3d3-da22a9060e93}</Project>
+      <Name>NeuralNetwork</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
