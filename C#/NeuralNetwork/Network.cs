@@ -15,7 +15,7 @@ namespace NeuralNetwork
         private Matrix _wihMatrix;
         private Matrix _whoMatrix;
 
-        private readonly Func<double, double> _af = (v) => (1 / (1 + System.Math.Pow(System.Math.E, v)));
+        private readonly Func<double, double> _af = (v) => (1 / (1 + System.Math.Pow(System.Math.E, -1 * v)));
 
         public Network(int inputNodes, int hiddenNodes, int outputNodes, double learningRate)
         {
