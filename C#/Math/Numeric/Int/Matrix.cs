@@ -71,6 +71,17 @@
             }
         }
 
+        protected override void DoPointwiseMultiply(Matrix<int> other, Matrix<int> result)
+        {
+            for (int i = 0; i < RowCount; i++)
+            {
+                for (int j = 0; j < ColumnCount; j++)
+                {
+                    result[i, j] = this[i, j] * other[i, j];
+                }
+            }
+        }
+
         //protected override void DoSubtract(int scalar, Matrix<int> result)
         //{
         //    Map(result, (a) => scalar - a);

@@ -78,5 +78,16 @@ namespace Math.Numeric.Double
                 }
             }
         }
+
+        protected override void DoPointwiseMultiply(Matrix<double> other, Matrix<double> result)
+        {
+            for (int i = 0; i < RowCount; i++)
+            {
+                for (int j = 0; j < ColumnCount; j++)
+                {
+                    result[i, j] = this[i, j] * other[i, j];
+                }
+            }
+        }
     }
 }

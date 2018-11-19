@@ -37,12 +37,25 @@ namespace NeuralNetwork
             GenerateRandomWeights(ref _whoMatrix);
         }
 
-        public void Train(Matrix inputs, Matrix expectedOutputs)
+        public void Train(Matrix inputs, Matrix targets)
         {
-            var outputs = QueryInternal(inputs);
+            if (inputs.ColumnCount != 1 || inputs.RowCount != _inputNodes)
+                throw new ArgumentException("Unexpected size of inbound array");
 
-            var errors = expectedOutputs - outputs;
-            //TODO:
+            var hiddenOutputs = ApplyActivationFunction((Matrix)(_wihMatrix * inputs));
+            var outputs = ApplyActivationFunction((Matrix)(_whoMatrix * hiddenOutputs));
+
+            var errors = targets - outputs;
+
+            var hiddenErrors = _whoMatrix.Transpose() * errors;
+
+            var whoDeltas = _learningRate * ((errors.PointwiseMultiply(outputs).PointwiseMultiply(1.0 - outputs)) * hiddenOutputs.Transpose());
+
+            _whoMatrix = (Matrix)(_whoMatrix + whoDeltas);
+
+            var wihDeltas = _learningRate * ((hiddenErrors.PointwiseMultiply(hiddenOutputs).PointwiseMultiply(1.0 - hiddenOutputs)) * inputs.Transpose());
+
+            _wihMatrix = (Matrix)(_wihMatrix + wihDeltas);
         }
 
         public Matrix Query(Matrix inputs)

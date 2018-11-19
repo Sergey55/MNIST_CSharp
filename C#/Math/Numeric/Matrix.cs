@@ -111,6 +111,18 @@ namespace Math.Numeric
             return result;
         }
 
+        public Matrix<T> PointwiseMultiply(Matrix<T> other)
+        {
+            if(this.ColumnCount != other.ColumnCount || this.RowCount != other.RowCount)
+                throw new Exception("Dimensions do no match");
+
+            var result = Build(RowCount, ColumnCount);
+
+            DoPointwiseMultiply(other, result);
+
+            return result;
+        }
+
         public Matrix<T> Transpose()
         {
             var result = Build(ColumnCount, RowCount);
@@ -141,6 +153,8 @@ namespace Math.Numeric
         protected abstract void DoMultiply(T scalar, Matrix<T> result);
 
         protected abstract void DoMultiply(Matrix<T> other, Matrix<T> result);
+
+        protected abstract void DoPointwiseMultiply(Matrix<T> other, Matrix<T> result);
 
         protected void Map(Matrix<T> result, Func<T, T> f)
         {
