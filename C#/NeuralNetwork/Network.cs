@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Math.Numeric.Double;
 
@@ -10,47 +6,61 @@ namespace NeuralNetwork
 {
     public class Network
     {
-        private int inputNodes;
-        private int hiddenNodes;
-        private int outputNodes;
+        private readonly int _inputNodes;
+        private readonly int _hiddenNodes;
+        private readonly int _outputNodes;
 
-        private double learningRate;
+        private double _learningRate;
 
-        private Matrix wihMatrix;
-        private Matrix whoMatrix;
+        private Matrix _wihMatrix;
+        private Matrix _whoMatrix;
+
+        private readonly Func<double, double> _af = (v) => (1 / (1 + System.Math.Pow(System.Math.E, v)));
 
         public Network(int inputNodes, int hiddenNodes, int outputNodes, double learningRate)
         {
-            this.inputNodes = inputNodes;
-            this.hiddenNodes = hiddenNodes;
-            this.outputNodes = outputNodes;
+            this._inputNodes = inputNodes;
+            this._hiddenNodes = hiddenNodes;
+            this._outputNodes = outputNodes;
 
-            this.learningRate = learningRate;
+            this._learningRate = learningRate;
 
             Init();
         }
 
         private void Init()
         {
-            wihMatrix = new Matrix(hiddenNodes, inputNodes);
-            whoMatrix = new Matrix(outputNodes, hiddenNodes);
+            _wihMatrix = new Matrix(_hiddenNodes, _inputNodes);
+            _whoMatrix = new Matrix(_outputNodes, _hiddenNodes);
 
-            GenerateRandomWeights(ref wihMatrix);
-            GenerateRandomWeights(ref whoMatrix);
+            GenerateRandomWeights(ref _wihMatrix);
+            GenerateRandomWeights(ref _whoMatrix);
         }
 
-        public void Train()
+        public void Train(Matrix inputs, Matrix expectedOutputs)
         {
+            var outputs = QueryInternal(inputs);
+
+            var errors = expectedOutputs - outputs;
             //TODO:
         }
 
-        public void Query(double[] inputData)
+        public Matrix Query(Matrix inputs)
         {
-            if (inputData.Length != inputNodes)
+            if (inputs.ColumnCount != 1 || inputs.RowCount != _inputNodes)
                 throw new ArgumentException("Unexpected size of inbound array");
 
-            var
-            //TODO:
+            var outputs = QueryInternal(inputs);
+
+            return outputs;
+        }
+
+        private Matrix QueryInternal(Matrix inputs)
+        {
+            var hiddenOutputs = ApplyActivationFunction((Matrix)(_wihMatrix * inputs));
+            var outputs = ApplyActivationFunction((Matrix)(_whoMatrix * hiddenOutputs));
+
+            return outputs;
         }
 
         private void GenerateRandomWeights(ref Matrix matrix)
@@ -64,6 +74,21 @@ namespace NeuralNetwork
                     matrix[i, j] = rnd.NextDouble() - 0.5;
                 }
             }
+        }
+
+        private Matrix ApplyActivationFunction(Matrix matrix)
+        {
+            var result = new Matrix(matrix.RowCount, matrix.ColumnCount);
+
+            for (int i = 0; i < matrix.RowCount; i++)
+            {
+                for (int j = 0; j < matrix.ColumnCount; j++)
+                {
+                    result[i, j] = _af(matrix[i, j]);
+                }
+            }
+
+            return result;
         }
     }
 }
