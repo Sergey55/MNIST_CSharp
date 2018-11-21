@@ -12,7 +12,7 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
-            var nn = new NeuralNetwork.Network(784, 100, 10, 0.1);
+            var nn = new NeuralNetwork.Network(784, 200, 10, 0.2);
 
             TrainNetwork(ref nn);
 
@@ -75,7 +75,7 @@ namespace TestApp
 
             var foregroundColor = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("Success rate is {0:0.000}%", (double)results.Sum(v => v) / counter);
+            Console.WriteLine("\nSuccess rate is {0:0.000}%", (double)results.Sum(v => v) / counter);
             Console.ForegroundColor = foregroundColor;
         }
 
