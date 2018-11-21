@@ -3,7 +3,7 @@ using System.IO;
 using System.Configuration;
 using System.Linq;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 using Math.Numeric.Double;
 
 namespace TestApp
@@ -18,12 +18,16 @@ namespace TestApp
 
             TestNetwork(ref nn);
 
-            Console.WriteLine("Done!\nPress Enter to exit");
+            Console.WriteLine("\nDone!\nPress Enter to exit");
             Console.ReadLine();
         }
 
         private static void TrainNetwork(ref NeuralNetwork.Network network) {
             var fileName = ConfigurationManager.AppSettings["trainData"];
+
+            Stopwatch sw = Stopwatch.StartNew();
+
+            Console.WriteLine("Training Neural Network.");
 
             WithFile(fileName, network, (parts, nn) => {
                 var inputs = GetInputs(parts);
@@ -32,21 +36,47 @@ namespace TestApp
 
                 nn.Train(inputs, targets);
             });
+
+            sw.Stop();
+
+            Console.WriteLine("Training is finished!\n");
+            Console.WriteLine("Training took {0:0.000} ms", sw.ElapsedMilliseconds);
         }
 
         private static void TestNetwork(ref NeuralNetwork.Network network) {
             var fileName = ConfigurationManager.AppSettings["testData"];
 
+            Console.WriteLine("\nTesting Neural Network.");
+
+            Stopwatch sw = Stopwatch.StartNew();
+
+            List<short> results = new List<short>();
+
             var counter = 0;
 
-            WithFile(fileName, network, (parts, nn) => {
+            WithFile(fileName, network, (parts, nn) =>
+            {
+                var expectedValue = parts[0];
+
                 var inputs = GetInputs(parts);
 
                 var result = nn.Query(inputs).MaxValueIndex();
 
-                Console.WriteLine( counter + ". Expected value: " + parts[0] + " actual value: " + result);
+                results.Add((short)((expectedValue == result) ? 1 : 0));
+
                 counter++;
             });
+
+            sw.Stop();
+
+            Console.WriteLine("Testing is finished!\n");
+
+            Console.WriteLine("Testing took {0:0.000} ms", sw.ElapsedMilliseconds);
+
+            var foregroundColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("Success rate is {0:0.000}%", (double)results.Sum(v => v) / counter);
+            Console.ForegroundColor = foregroundColor;
         }
 
         private static void WithFile(string fileName, NeuralNetwork.Network network, Action<List<Int32>, NeuralNetwork.Network> action)
